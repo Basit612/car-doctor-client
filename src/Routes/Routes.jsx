@@ -15,27 +15,36 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home></Home>,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <Login></Login>,
       },
       {
-        path: '/singup',
+        path: "/singup",
         element: <SingUp></SingUp>,
       },
       {
-        path: '/checkout/:id',
-        element: <Checkout></Checkout>,
-        loader: ({params}) => fetch(`http://localhost:5000/servises/${params.id}`)
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoute>
+            <Checkout></Checkout>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/servises/${params.id}`),
       },
       {
-        path: '/bookings',
-        element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
-      }
-    ]
+        path: "/bookings",
+        element: (
+          <PrivateRoute>
+            <Bookings></Bookings>
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 

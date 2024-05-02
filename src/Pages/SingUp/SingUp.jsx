@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from '../../assets/images/login/login.svg'
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -6,6 +6,8 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const SingUp = () => {
   const {createUser}= useContext(AuthContext);
+  const location = useLocation();
+  const navigate =useNavigate();
 
   const handleSingUp = event =>{
     event.preventDefault();
@@ -19,6 +21,7 @@ const SingUp = () => {
     .then (result =>{
       const user = result.user;
       console.log(user);
+      navigate(location?.state ? location?.state : '/')
     })
     .catch(error => console.log(error));
   }
