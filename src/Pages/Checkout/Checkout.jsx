@@ -25,9 +25,9 @@ const Checkout = () => {
       service_id: _id,
       price: price,
     };
-    console.log(order);
+    // console.log(order);
 
-    fetch('http://localhost:5000/bookings', {
+    fetch('https://car-doctor-server-d4esldflf-abdul-basits-projects-2ef8b724.vercel.app/bookings', {
       method: 'POST',
       headers: {
        'content-type': 'application/json'
@@ -36,7 +36,7 @@ const Checkout = () => {
     })
     .then(res => res.json())
     .then(data =>{
-      console.log(data);
+      // console.log(data);
       if(data.insertedId){
         Swal.fire({
           position: "top-end",

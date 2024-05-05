@@ -1,15 +1,16 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
-import { useContext } from 'react';
-import { AuthContext } from '../../provider/AuthProvider';
+// import { useContext } from 'react';
+// import { AuthContext } from '../../provider/AuthProvider';
 import axios from 'axios';
+import UseAuth from '../../Hooks/UseAuth';
 
 const Login = () => {
-
-  const {signIn} = useContext(AuthContext);
+  const {signIn} = UseAuth();
+  // const {signIn} = useContext(AuthContext);
   const location = useLocation();
   const navigate =useNavigate();
-  console.log(location);
+  // console.log(location);
 
   const handleLogin = event =>{
     event.preventDefault();
@@ -21,12 +22,12 @@ const Login = () => {
     signIn(email,password)
     .then (result =>{
       const loggedInUser = result.user;
-      console.log(loggedInUser);
+      // console.log(loggedInUser);
       const user ={email};
      
-      axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
+      axios.post('https://car-doctor-server-d4esldflf-abdul-basits-projects-2ef8b724.vercel.app/jwt', user, {withCredentials: true})
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data.success){
           navigate(location?.state ? location?.state : '/')
         }
